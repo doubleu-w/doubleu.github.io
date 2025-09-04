@@ -15,7 +15,7 @@ export default function Hero(){
       </div>
       <div className="hero-card">
         <div className="kicker">Example bundle</div>
-        <div style="height:12px"></div>
+        <div style={{ height: 12 }}></div>
         <div className="grid">
           {[
             "30-Day Fitness Plan (ebook)",
@@ -25,7 +25,10 @@ export default function Hero(){
             "Motivation SFX (audio)",
             "AI Prompt Pack (business)"
           ].map((t)=>(
-            <div className="card" key={t}><h3 style={{fontSize:"1rem"}}>{t}</h3><p className="small">generated sample</p></div>
+            <div className="card" key={t}>
+              <h3 style={{fontSize:"1rem"}}>{t}</h3>
+              <p className="small">generated sample</p>
+            </div>
           ))}
         </div>
       </div>
