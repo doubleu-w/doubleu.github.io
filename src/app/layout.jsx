@@ -1,5 +1,5 @@
-import "./globals.css";
 import Link from "next/link";
+import "./globals.css";
 
 export const metadata = {
   title: "Double You",
@@ -10,18 +10,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <header className="site-header">
-          <Link href="/" className="logo" aria-label="Double You Home">
-            <img src="/logo.png" alt="Double You Logo" />
-          </Link>
-          <nav className="nav" aria-label="Primary">
-            <Link className="nav-btn" href="/catalog">Catalog</Link>
-            <Link className="nav-btn" href="/generator">Generator</Link>
-            <Link className="nav-btn" href="/helper">Everyday Helper</Link>
+        {/* Top bar */}
+        <header className="topbar">
+          <div className="topbar-left">
+            <Link href="/" className="logo-link" aria-label="Double You Home">
+              <img src="/logo.png" alt="Double You logo" className="nav-logo" />
+            </Link>
+            <span className="brand">Double You</span>
+          </div>
+
+          <nav className="topbar-right">
+            <Link href="/catalog" className="nav-btn">Catalog</Link>
+            <Link href="/generator" className="nav-btn">Generator</Link>
+            <Link href="/helper" className="nav-btn">Everyday Helper</Link>
           </nav>
         </header>
-        <main className="container">{children}</main>
-        <footer>© {new Date().getFullYear()} Double You — The Second You</footer>
+
+        <main className="page-wrap">{children}</main>
       </body>
     </html>
   );
