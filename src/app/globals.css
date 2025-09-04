@@ -113,3 +113,18 @@ footer{margin:50px 0 24px;color:var(--muted);text-align:center;font-size:.9rem}
   color: inherit;
 }
 /* deploy-bump 1757000427 */
+/* Glowing W Logo */
+.w-logo {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 20px rgba(0, 123, 255, 0.9);
+  display: inline-block;
+}
+
+/* Remove underlines in Example Bundles */
+.examples li a,
+.examples li {
+  text-decoration: none !important;
+  color: white;
+}
