@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',        // produce static files in /out
-  images: { unoptimized: true },
-  trailingSlash: true
+  // Vercel runs Next.js natively (no "output: 'export'")
+  images: { unoptimized: true } // keep if you don't use a loader yet
 };
 export default nextConfig;
