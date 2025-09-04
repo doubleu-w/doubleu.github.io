@@ -11,18 +11,17 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <header className="site-header">
-          {/* Top-left logo */}
           <Link href="/" className="logo" aria-label="Double You Home">
             <img src="/logo.png" alt="Double You Logo" />
           </Link>
-          {/* Top-right small buttons */}
           <nav className="nav" aria-label="Primary">
             <Link className="nav-btn" href="/catalog">Catalog</Link>
             <Link className="nav-btn" href="/generator">Generator</Link>
             <Link className="nav-btn" href="/helper">Everyday Helper</Link>
           </nav>
         </header>
-        <main>{children}</main>
+        <main className="container">{children}</main>
+        <footer>© {new Date().getFullYear()} Double You — The Second You</footer>
       </body>
     </html>
   );

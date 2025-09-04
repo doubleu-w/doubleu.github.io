@@ -19,19 +19,29 @@ export default function Hero(){
   return (
     <section className="hero">
       <h1 className="h1">The Second You</h1>
+      <p className="sub">Pick a niche. Generate mini e-books, templates, planners, prompts, audio packs and more — then package them, fast.</p>
 
-      <Link className="glow-btn" href="/generator">Start Generating</Link>
+      <div className="glow-wrap">
+        <Link className="glow-btn" href="/generator">Start Generating</Link>
+      </div>
 
-      <div className="hero-card">
+      <div className="panel" style={{marginTop:22}}>
         <div className="small" style={{marginBottom:10, opacity:.9}}>Example bundles</div>
         <div className="grid">
           {bundles.map((b)=>(
             <Link className="card" key={b.label} href={linkFor(b)}>
               <h3>{b.label}</h3>
-              <p className="small">click to prefill generator</p>
+              <p>Click to prefill generator</p>
             </Link>
           ))}
         </div>
+      </div>
+
+      <div className="features">
+        <div className="feature"><div className="emoji">📝</div><div><h4>Education & Guides</h4><p>E-books, courses, cheat sheets, templates.</p></div></div>
+        <div className="feature"><div className="emoji">🎨</div><div><h4>Creative & Design</h4><p>Canva & Notion templates, printables, wallpapers.</p></div></div>
+        <div className="feature"><div className="emoji">🎧</div><div><h4>Audio & Video</h4><p>AI voice packs, music loops, SFX, stock clips.</p></div></div>
+        <div className="feature"><div className="emoji">💻</div><div><h4>Tech & Business</h4><p>Prompt packs, spreadsheets, site & app kits.</p></div></div>
       </div>
     </section>
   );
