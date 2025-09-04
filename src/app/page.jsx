@@ -1,17 +1,14 @@
-export default function Home() {
+import Hero from "../components/Hero.jsx";
+import CategoryGrid from "../components/CategoryGrid.jsx";
+import CTA from "../components/CTA.jsx";
+
+export default function HomePage(){
   return (
-    <section>
-      <h1 style={{fontSize:"2.25rem",fontWeight:800,marginBottom:"0.75rem"}}>
-        Your website is live-ready 🚀
-      </h1>
-      <p style={{maxWidth:680}}>
-        Edit this page at <code>src/app/page.jsx</code>. Commit & push to redeploy on Vercel.
-      </p>
-      <ul style={{marginTop:"1rem"}}>
-        <li>✅ TypeScript fully removed</li>
-        <li>✅ No Tailwind/PostCSS plugins required</li>
-        <li>✅ Minimal Next.js App Router setup</li>
-      </ul>
-    </section>
-  );
+    <>
+      <Hero/>
+      <div className="divider"></div>
+      <CategoryGrid/>
+      <CTA/>
+    </>
+  )
 }
