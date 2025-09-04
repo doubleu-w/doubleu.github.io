@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const PRODUCT_MAP = {
   education: ["Mini E-book","Course Outline","Cheat Sheet","Template Pack"],
@@ -10,40 +11,53 @@ const PRODUCT_MAP = {
 };
 
 export default function Generator(){
-  const [niche,setNiche] = useState("education");
-  const [types,setTypes] = useState(["Mini E-book","Template Pack"]);
-  const [audience,setAudience] = useState("Beginners");
-  const [topic,setTopic] = useState("Productivity");
+  const params = useSearchParams();
+
+  const initial = useMemo(()=>({
+    niche: params.get("niche") || "education",
+    audience: params.get("audience") || "Beginners",
+    topic: params.get("topic") || "Productivity",
+    types: (params.get("types") || "").split(",").map(s=>s.trim()).filter(Boolean)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [params]);
+
+  const [niche,setNiche] = useState(initial.niche);
+  const [types,setTypes] = useState(initial.types.length ? initial.types : ["Mini E-book","Template Pack"]);
+  const [audience,setAudience] = useState(initial.audience);
+  const [topic,setTopic] = useState(initial.topic);
   const [result,setResult] = useState([]);
+
+  const available = PRODUCT_MAP[niche] || [];
 
   const toggleType=(t)=>{
     setTypes(prev => prev.includes(t) ? prev.filter(x=>x!==t) : [...prev,t]);
   }
 
   const generate=()=>{
-    // Local, deterministic mock generation (no API calls).
-    // You can later replace this with a server action or API route.
     const base = PRODUCT_MAP[niche] || [];
-    const picked = base.filter(b => types.includes(b));
-    const ideas = picked.map((p,i)=>({
+    const picked = (types.length?types:base);
+    const ideas = picked.map((p)=>({
       title: `${p}: ${topic} for ${audience}`,
       description: `A ${p.toLowerCase()} tailored to ${audience.toLowerCase()} in ${topic}. Includes outlines, steps, and assets.`,
       filename: `${p.replace(/\s+/g,'-').toLowerCase()}-${topic.toLowerCase()}.pdf`
     }));
-    setResult(ideas.length?ideas:[{title:"Choose at least one type", description:"", filename:""}]);
+    setResult(ideas);
   }
 
-  const available = PRODUCT_MAP[niche] || [];
+  useEffect(()=>{
+    if (params.get("autogen")==="1") generate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   return (
-    <section className="section">
+    <section className="container" style={{paddingTop:24}}>
       <h1 className="h1" style={{fontSize:"2rem"}}>Generator</h1>
-      <p className="p">Select a niche and product types. Click Generate — we’ll draft titles, descriptions, and filenames you can export later.</p>
+      <p className="small">Prefill via homepage bundles or customize below.</p>
 
-      <div className="row" style={{marginTop:16}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginTop:12}}>
         <div>
           <label className="small">Niche</label>
-          <select className="select" value={niche} onChange={e=>{setNiche(e.target.value); setTypes([]);}}>
+          <select className="nav-btn" value={niche} onChange={e=>{setNiche(e.target.value); setTypes([]);}}>
             <option value="education">Education & Knowledge</option>
             <option value="creative">Creative & Design</option>
             <option value="audio">Audio & Video</option>
@@ -53,20 +67,20 @@ export default function Generator(){
         </div>
         <div>
           <label className="small">Audience</label>
-          <input className="input" value={audience} onChange={e=>setAudience(e.target.value)} placeholder="Beginners / Busy Parents / Students"/>
+          <input className="nav-btn" value={audience} onChange={e=>setAudience(e.target.value)} placeholder="Beginners / Busy Parents / Students"/>
         </div>
       </div>
 
-      <div className="row" style={{marginTop:12}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginTop:12}}>
         <div>
           <label className="small">Topic</label>
-          <input className="input" value={topic} onChange={e=>setTopic(e.target.value)} placeholder="e.g., Fitness, Crypto, Time-Management"/>
+          <input className="nav-btn" value={topic} onChange={e=>setTopic(e.target.value)} placeholder="e.g., Fitness, Crypto, Time-Management"/>
         </div>
         <div>
           <label className="small">Product types (toggle)</label>
           <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-            {available.map(t=>(
-              <button key={t} className="btn secondary" onClick={()=>toggleType(t)} style={{borderColor: types.includes(t) ? "var(--brand)" : "#2A3A66"}}>
+            {(available.length?available:types).map(t=>(
+              <button key={t} className="nav-btn" onClick={()=>toggleType(t)} style={{borderColor: types.includes(t) ? "var(--brand)" : "rgba(255,255,255,.10)"}}>
                 {types.includes(t) ? "✓ " : ""}{t}
               </button>
             ))}
@@ -75,7 +89,7 @@ export default function Generator(){
       </div>
 
       <div style={{marginTop:16}}>
-        <button className="btn" onClick={generate}>Generate</button>
+        <button className="glow-btn" onClick={generate}>Generate</button>
       </div>
 
       {result.length>0 && (
@@ -84,7 +98,7 @@ export default function Generator(){
             <div className="card" key={idx}>
               <h3>{r.title}</h3>
               <p className="small" style={{margin:"6px 0 10px"}}>{r.description}</p>
-              {r.filename && <div className="badge">File: {r.filename}</div>}
+              <div className="small">File: {r.filename}</div>
             </div>
           ))}
         </div>
