@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Double You — Website",
-  description: "Modern marketing site running on Vercel.",
+  description: "Modern website running on Vercel.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
