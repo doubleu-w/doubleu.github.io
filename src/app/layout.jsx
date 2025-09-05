@@ -30,9 +30,6 @@ export default function RootLayout({ children }) {
           </div>
 
           <nav className="topbar-right">
-            <Link href="/catalog" className="nav-btn">Catalog</Link>
-            <Link href="/generator" className="nav-btn">Generator</Link>
-            <Link href="/helper" className="nav-btn">Everyday Helper</Link>
           </nav>
         </header>
 
