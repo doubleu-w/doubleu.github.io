@@ -1,55 +1,64 @@
-import Link from "next/link";
-
 export default function Hero() {
   return (
-    <section className="hero">
+    <section className="hero-wrap">
+
+      {/* Top: tiny example bundle squares */}
+      <div className="top-bundles">
+        <a className="top-bundle" href="/generator?niche=fitness&b=plan">30-Day Plan</a>
+        <a className="top-bundle" href="/generator?niche=design&b=canva-pack">IG Canva Pack</a>
+        <a className="top-bundle" href="/generator?niche=audio&b=sfx">SFX Pack</a>
+        <a className="top-bundle" href="/generator?niche=business&b=prompts">Biz Prompts</a>
+      </div>
+
+      {/* Center logo */}
+      <div className="logo-center">
+        {/* Uses your /public/logo.png (transparent W with blue glow baked in) */}
+        <img src="/logo.png" alt="Double You logo" className="logo-img" />
+      </div>
+
       {/* Title */}
-      <h1 className="hero-title">The Second You</h1>
+      <h1 className="title">…The Second YOU</h1>
 
-      {/* Sub */}
-      <p className="hero-sub">
-        Pick a niche. Generate mini e-books, templates, planners, prompts, audio packs and more — then package them, fast.
-      </p>
+      {/* Categories (moved above the generate bar) */}
+      <div className="categories">
+        <a className="cat" href="/generator?niche=education">
+          <span className="emoji">📘</span>
+          <span className="txt">
+            <b>Education &amp; Guides</b>
+            <small>E-books, courses, cheat sheets, templates.</small>
+          </span>
+        </a>
 
-      {/* Start button */}
-      <div className="cta-row">
-        <Link href="/generator" className="glow-btn">Start Generating</Link>
+        <a className="cat" href="/generator?niche=creative">
+          <span className="emoji">🎨</span>
+          <span className="txt">
+            <b>Creative &amp; Design</b>
+            <small>Canva &amp; Notion templates, printables, wallpapers.</small>
+          </span>
+        </a>
+
+        <a className="cat" href="/generator?niche=audio">
+          <span className="emoji">🎧</span>
+          <span className="txt">
+            <b>Audio &amp; Video</b>
+            <small>AI voice packs, music loops, SFX, stock clips.</small>
+          </span>
+        </a>
+
+        <a className="cat" href="/generator?niche=business">
+          <span className="emoji">💻</span>
+          <span className="txt">
+            <b>Tech &amp; Business</b>
+            <small>Prompt packs, spreadsheets, site &amp; app kits.</small>
+          </span>
+        </a>
       </div>
 
-      {/* Example bundles */}
-      <div className="panel">
-        <p className="panel-title">Example bundles</p>
-        <div className="grid">
-          {[
-            ["30-Day Fitness Plan (ebook)"],
-            ["Gym Split Poster (printable)"],
-            ["Meal Prep Sheet (sheet)"],
-            ["Instagram Reels Pack (canva)"],
-            ["Motivation SFX (audio)"],
-            ["AI Prompt Pack (business)"],
-          ].map(([label]) => (
-            <Link key={label} href={`/generator?prefill=${encodeURIComponent(label)}`} className="card">
-              <h3>{label}</h3>
-              <p>Click to prefill generator</p>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* Feature buckets */}
-      <div className="features">
-        {[
-          ["📝", "Education & Guides", "E-books, courses, cheat sheets, templates."],
-          ["🎨", "Creative & Design", "Canva & Notion templates, printables, wallpapers."],
-          ["🎧", "Audio & Video", "AI voice packs, music loops, SFX, stock clips."],
-          ["💻", "Tech & Business", "Prompt packs, spreadsheets, site & app kits."],
-        ].map(([emoji, title, text]) => (
-          <div key={title} className="feature">
-            <div className="emoji">{emoji}</div>
-            <h4>{title}</h4>
-            <p>{text}</p>
-          </div>
-        ))}
+      {/* Big expanded Generate bar/button */}
+      <div className="generate-wrap">
+        <a className="generate-btn" href="/generator">
+          Create…
+        </a>
       </div>
     </section>
   );
