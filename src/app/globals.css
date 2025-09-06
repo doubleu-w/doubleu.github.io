@@ -292,3 +292,18 @@ body {
 .hero-wrap a,
 .hero-wrap a:hover,
 .hero-wrap a:visited{ text-decoration: none !important; }
+
+.top-bundles {
+  position: absolute;
+  top: 20px;      /* distance from top */
+  right: 20px;    /* distance from right */
+  display: flex;
+  gap: 12px;      /* space between buttons */
+}
+
+.top-bundle {
+  transform: scale(0.75);  /* shrink buttons to 3/4 size */
+  transform-origin: top right;
+}
+
+
