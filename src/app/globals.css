@@ -293,17 +293,35 @@ body {
 .hero-wrap a:hover,
 .hero-wrap a:visited{ text-decoration: none !important; }
 
-.top-bundles {
-  position: absolute;
-  top: 20px;      /* distance from top */
-  right: 20px;    /* distance from right */
+
+/* Top example bundles – pin to top-right of the screen */
+.top-bundles{
+  position: fixed;     /* was absolute */
+  top: 16px;
+  right: 20px;
   display: flex;
-  gap: 12px;      /* space between buttons */
+  gap: 10px;
+  z-index: 50;         /* stay above hero */
 }
 
-.top-bundle {
-  transform: scale(0.75);  /* shrink buttons to 3/4 size */
+/* 3/4 size buttons (you already have this, keep it) */
+.top-bundle{
+  transform: scale(0.75);
   transform-origin: top right;
 }
 
+/* Make sure main content isn’t hidden under the fixed buttons */
+.hero-wrap{ padding-top: 80px; }
+
+/* Mobile tweaks */
+@media (max-width: 900px){
+  .top-bundles{
+    top: 10px;
+    right: 12px;
+    gap: 8px;
+  }
+  .top-bundle{
+    transform: scale(0.7);
+  }
+}
 
